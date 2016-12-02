@@ -20,56 +20,58 @@ using Hangfire.States;
 
 namespace Hangfire
 {
-    /// <summary>
-    /// Represents attribute, that is used to determine queue name
-    /// for background jobs. It can be applied to the methods and classes. 
-    /// If the attribute is not applied neither to the method, nor the class, 
-    /// then default queue will be used.
-    /// </summary>
-    /// 
-    /// <example><![CDATA[
-    /// 
-    /// [Queue("high")]
-    /// public class ErrorService
-    /// {
-    ///     public void ReportError(string message) { }
-    /// 
-    ///     [Queue("critical")]
-    ///     public void ReportFatal(string message) { }
-    /// }
-    /// 
-    /// // Background job will be placed on the 'high' queue.
-    /// BackgroundJob.Enqueue<ErrorService>(x => x.ReportError("Something bad happened"));
-    /// 
-    /// // Background job will be placed on the 'critical' queue.
-    /// BackgroundJob.Enqueue<ErrorService>(x => x.ReportFatal("Really bad thing!"));
-    /// 
-    /// ]]></example>
-    public sealed class QueueAttribute : JobFilterAttribute, IElectStateFilter
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="QueueAttribute"/> class
-        /// using the specified queue name.
-        /// </summary>
-        /// <param name="queue">Queue name.</param>
-        public QueueAttribute(string queue)
-        {
-            Queue = queue;
-            Order = Int32.MaxValue;
-        }
+	/// <summary>
+	/// Represents attribute, that is used to determine queue name
+	/// for background jobs. It can be applied to the methods and classes. 
+	/// for background and recurring jobs. It can be applied to the methods and classes. 
+	/// If the attribute is not applied neither to the method, nor the class, 
+	/// then default queue will be used.
+	/// This value will be overriden if a queue is provided whenever the BackgroundJob or
+	/// RecurringJob are created
+	/// </summary>
+	/// 
+	/// <example><![CDATA[
+	/// 
+	/// [Queue("high")]
+	/// public class ErrorService
+	/// {
+	///     public void ReportError(string message) { }
+	/// 
+	///     [Queue("critical")]
+	///     public void ReportFatal(string message) { }
+	/// 
+	///     [Queue("notification")]
+	///     public void NotifyAdminsOfCurrentErrorCount(params string[] adminEmails) { }
+	/// }
+	/// 
+	/// // Background job will be placed on the 'high' queue.
+	/// BackgroundJob.Enqueue<ErrorService>(x => x.ReportError("Something bad happened"));
+	/// 
+	/// // Background job will be placed on the 'critical' queue.
+	/// BackgroundJob.Enqueue<ErrorService>(x => x.ReportFatal("Really bad thing!"));
+	/// 
+	/// // Recurring job will be placed in the 'email' queue and not the 'notification' queue.
+	/// RecurringJob.AddOrUpdate<ErrorService>(x => x.NotifyAdminsOfCurrentErrorCount("admin@noreply.com"), myCronExpression, myTimeZone, "email"); 
+	/// 
+	/// ]]></example>
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface, AllowMultiple = false)]
+	public sealed class QueueAttribute : Attribute
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="QueueAttribute"/> class
+		/// using the specified queue name.
+		/// </summary>
+		/// <param name="queue">Queue name.</param>
+		public QueueAttribute(string queue)
+		{
+			Queue = queue;
+			//Order = Int32.MaxValue;
+		}
 
-        /// <summary>
-        /// Gets the queue name that will be used for background jobs.
-        /// </summary>
-        public string Queue { get; }
+		/// <summary>
+		/// Gets the queue name that will be used for jobs.
+		/// </summary>
+		public string Queue { get; }
 
-        public void OnStateElection(ElectStateContext context)
-        {
-            var enqueuedState = context.CandidateState as EnqueuedState;
-            if (enqueuedState != null)
-            {
-                enqueuedState.Queue = Queue;
-            }
-        }
-    }
+	}
 }
