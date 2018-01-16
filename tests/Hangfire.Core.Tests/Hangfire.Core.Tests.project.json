@@ -9,6 +9,6 @@
     "win": {}
   },
   "frameworks": {
-    "net45": {}
+    "net462": {}
   }
 }
