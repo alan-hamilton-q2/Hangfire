@@ -1,10 +1,11 @@
 ﻿{
-	"dependencies": {
-		"Moq": "4.6.36-alpha",
-		"Moq.Sequences.NoNUnit": "1.0.1",
-		"xunit": "2.2.0-beta2-build3300",
-		"ncrontab": "3.1.0"
-	},
+  "dependencies": {
+    "Castle.Core": "4.2.1",
+    "Moq": "4.7.0",
+    "Moq.Sequences": "2.1.0",
+    "ncrontab": "3.1.0",
+    "xunit": "2.2.0-beta2-build3300"
+  },
   "runtimes": {
     "win": {}
   },
