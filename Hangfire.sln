@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangfire.Core", "src\Hangfi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcSample", "samples\MvcSample\MvcSample.csproj", "{FE5EAE49-2627-42B6-8C2B-EBE4D45B4D97}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{119DA7FA-B94C-4B63-AEC9-428EF834E0D8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangfire.SqlServer", "src\Hangfire.SqlServer\Hangfire.SqlServer.csproj", "{A523C0E3-097D-4869-977F-15A717EA3E83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{766BE831-F758-46BC-AFD3-BBEEFE0F686F}"
