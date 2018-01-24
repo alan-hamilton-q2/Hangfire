@@ -7,6 +7,7 @@
     <Company>Hangfire</Company>
     <Authors></Authors>
     <Product />
+	<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
 
   <ItemGroup>

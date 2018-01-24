@@ -6,6 +6,7 @@
     <RootNamespace>Hangfire.SqlServer</RootNamespace>
     <Authors></Authors>
     <Company>Hangfire</Company>
+	<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +30,10 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
+	<!-- Dapper dependencies that were excluded by the Dapper 1.50.4 nuspec file for the standard 2.0 target -->
+	<PackageReference Include="System.Data.SqlClient" Version="4.4.0"/>
+	<PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+	<PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
   </ItemGroup>
 
   <ItemGroup>

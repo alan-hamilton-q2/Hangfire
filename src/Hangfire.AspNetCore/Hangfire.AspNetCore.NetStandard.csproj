@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Hangfire.AspNetCore</AssemblyName>
     <RootNamespace>Hangfire.AspNetCore</RootNamespace>
+	<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
 
   <ItemGroup>
